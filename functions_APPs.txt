@@ -238,7 +238,7 @@ install_vscode() {
 
 install_dockerce() {
     echo_info "Installing Docker-CE"
-    sudo apt remove docker docker-engine docker.io containerd runc -y
+    sudo apt remove docker* docker-engine docker.io containerd runc -y
     sudo apt update && sudo apt -y full-upgrade
     sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -252,7 +252,7 @@ install_dockercompose() {
         echo "Need To install Docker first "
         install_dockerce
     fi
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
     sudo chmod +x /usr/local/bin/docker-compose 
     sudo docker-compose --version 
 }

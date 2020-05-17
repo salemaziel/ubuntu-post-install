@@ -65,11 +65,11 @@ echo_info '
 
 sleep 3
 
-sudo apt-get install --install-recommends dialog -y
+sudo apt-get install --install-recommends dialog curl wget git gdebi python3-pip -y
 
 
 
-read -p "Are you Salem? [y/n]" ru_salem
+read -p "Are you Salem? [y/n]    " ru_salem
 case $ru_salem in
     Y) 
         echo_warn "No mames guey, no you're not. Nice try. Skipping."
@@ -112,7 +112,7 @@ esac
 
 
 
-command=(dialog --radiolist "Select Your Ubuntu Flavor" 22 76 16)
+command=(dialog --radiolist "Select Your Ubuntu Flavor. Press Space to Select, Arrow Keys to Navigate, Enter to Choose and Continue " 22 76 16)
 os_options=(1 "Ubuntu: Gnome" off
          2 "Kubuntu: KDE" on
          3 "Lubuntu: LXDM" off
@@ -125,17 +125,17 @@ clear
 
 
 cmd=(dialog --separate-output --checklist "Select Extra Apps To Install. Default is to Install All. Navigate with Up/Down Arrows. Select/Unselect with Spacebar. Hit Enter key When Finished To Continue. ESC key/Cancel exits and continues without installing any options" 22 176 16)
-options=(1 "Etcher: Live USB creator" on
-         2 "Youtube-DL: Internet Video Downloader" on
+options=(1 "Etcher: Live USB creator (RECOMMENDED)" on
+         2 "Youtube-DL: Internet Video Downloader (RECOMMENDED)" on
          3 "Nixnote2: Linux interface for Evernote" on
-         4 "Inxi: System/Hardware Identifier" on
+         4 "Inxi: System/Hardware Identifier (RECOMMENDED)" on
          5 "ProtonVPN-CLI: ProtonVPN-CLI-NG" on
          6 "Signal: Encrypted Messenger for Desktop" on
          7 "Spotify: Music Streaming" on
          8 "Caprine: Facebook Messenger for Linux" on
          9 "TeamViewer: Remote Desktop Sharing" on
-         10 "Tor: Onion Routing for (kind of) Anonymous Secure Browsing" on
-         11 "OnionShare: Share Files Securely Over Tor Network && TorBrowser-Launcher (Needs Tor)" on
+         10 "Tor Browser: Anonymous Secure Browsing (RECOMMENDED)" on
+         11 "OnionShare: Share Files Over Tor && TorBrowser-Launcher (Needs Tor) (RECOMMENDED)" on
          12 "Google Chrome" on
          13 "Slack Messenger" on
          14 "VirtualBox: Virtual Operating Systems" on
@@ -143,22 +143,27 @@ options=(1 "Etcher: Live USB creator" on
          16 "Zoom: Video Conferences" on
          17 "Brave Browser" on
          18 "Skype Video Chat" on
-         19 "BaseCamp: Unofficial Desktop App" on
+         19 "BaseCamp: Unofficial Desktop App" off
          20 "Google Cloud Platform SDK CommandLine Tools" on
-         21 "NodeJS 12 && NPM package manager" on
+         21 "NodeJS 12 && NPM package manager (RECOMMENDED)" on
          22 "NPM - Gatsby-CLI" on
          23 "NPM - Surge" on
          24 "NPM - Nativefier" on
-         25 "YARN: Additional NodeJS packagemanager" on
-         26 "FireJail: Application Sandbox" on
-         27 "Standard Notes: Encrypted Device-Syncing Notes" on
-         28 "Discord: Voice & Text Chat" on
-         29 "Mozilla Thunderbird: Email Client" on
-         30 "Visual Studio Code: Advanced Text Editor" on
-         31 "Docker: Run Apps in Isolated Containers" on
-         32 "Docker-Compose: Simplified Docker Container configuration" on
-         33 "Syncthing: Sync files across ypur devices" on
-         34 "Postman: API Testing" on)
+         25 "NPM - N: NPM version manager and installer (RECOMMENDED)" on
+         26 "YARN: Additional NodeJS packagemanager (RECOMMENDED)" on
+         27 "FireJail: Application Sandbox (RECOMMENDED)" on
+         28 "Standard Notes AppImage: Encrypted Device-Syncing Notes" on
+         29 "Discord: Voice & Text Chat" off
+         30 "Mozilla Thunderbird: Email Client" on
+         31 "Visual Studio Code: Advanced Text Editor (RECOMMENDED)" on
+         32 "Docker: Run Apps in Isolated Containers" on
+         33 "Docker-Compose: Simplified Docker Container configuration" on
+         34 "Syncthing: Sync files across ypur devices" on
+         35 "Postman: API Testing" on
+         36 "OpenVPN3: Latest OpenVPN build (RECOMMENDED)" on
+         37 "AppImageLauncher: Integrate AppImages to Desktop (RECOMMENDED)" on
+         38 "Google Fonts:Fonts for your Desktop" on
+         39 "RClone: Cloud Sync Backups using Rsync" on)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 
@@ -283,31 +288,51 @@ do
             install_nativefier
             ;;
         25)
-            install_yarn
+            install_n
             ;;
         26)
-            install_firejail
+            install_yarn
             ;;
         27)
-            install_stdnotes
+            install_firejail
             ;;
         28)
-            install_discord
+            install_stdnotes
             ;;
         29)
-            sudo apt install -y thunderbird
+            install_discord
             ;;
         30)
-            install_vscode
+            sudo apt install -y thunderbird
             ;;
         31)
-            install_dockerce
+            install_vscode
             ;;
         32)
-            install_dockercompose
+            install_dockerce
             ;;
         33)
+            install_dockercompose
+            ;;
+        34)
             install_syncthing
+            ;;
+        35)
+            install_postman
+            ;;
+        36)
+            install_openvpn3
+            ;; 
+        37)
+            install_appimagelauncher
+            ;;    
+        38)
+            chmod +x install-google-fonts.sh
+            ./install-google-fonts.sh
+            ;;
+        39)
+            chmod +x install-rclone-cloudsync.sh
+            ./install-rclone-cloudsync.sh
             ;;
     esac
 done

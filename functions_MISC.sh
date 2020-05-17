@@ -48,14 +48,14 @@ echo_info "Removing some unnecessary things"
 sudo DEBIAN_FRONTEND=noninteractive apt purge exim4 exim4-daemon-light exim4-config exim4-base mpd postfix apache2 apache2-bin libapache2-mod-php libapache2-mod-php7.* libaprutil1-dbd-sqlite3 cups cups-browsed avahi-daemon -y
 }
 
-blacklist_me() {
-sudo modprobe -rv mei_hdcp
-sudo modprobe -rv mei_me
-sudo modprobe -rv mei_mii
-echo "blacklist mei" | sudo tee -a /etc/modprobe.d/blacklist.conf
-echo "blacklist mei_me" | sudo tee -a /etc/modprobe.d/blacklist.conf
-echo "blacklist mei_hdcp" | sudo tee -a /etc/modprobe.d/blacklist.conf
-}
+#blacklist_me() {
+#sudo modprobe -rv mei_hdcp
+#sudo modprobe -rv mei_me
+#sudo modprobe -rv mei_mii
+#echo "blacklist mei" | sudo tee -a /etc/modprobe.d/blacklist.conf
+#echo "blacklist mei_me" | sudo tee -a /etc/modprobe.d/blacklist.conf
+#echo "blacklist mei_hdcp" | sudo tee -a /etc/modprobe.d/blacklist.conf
+#}
 
 salems_kconfs() {
     mkdir -p $HOME/.config/latte

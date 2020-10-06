@@ -115,9 +115,9 @@ sudo gdebi -n slack-desktop*.deb
 install_vbox() {
 echo_info " *** installing virtualbox *** "
 cd $HOME/Downloads ;
-wget https://download.virtualbox.org/virtualbox/6.1.2/virtualbox-6.1_6.1.2-135662~Ubuntu~bionic_amd64.deb
-wget https://download.virtualbox.org/virtualbox/6.1.2/Oracle_VM_VirtualBox_Extension_Pack-6.1.2.vbox-extpack
-sudo gdebi -n virtualbox-6.1_6.1.2-135662~Ubuntu~bionic_amd64.deb
+wget https://download.virtualbox.org/virtualbox/6.1.8/virtualbox-6.1_6.1.8-137981~Ubuntu~eoan_amd64.deb
+https://download.virtualbox.org/virtualbox/6.1.8/Oracle_VM_VirtualBox_Extension_Pack-6.1.8.vbox-extpack
+sudo gdebi -n virtualbox-6.1_6.1.8-137981~Ubuntu~eoan_amd64.deb
 }
 
 install_vivaldi() {
@@ -205,7 +205,7 @@ install_nativefier() {
 npm install  -g nativefier
 }
 
-install_n {
+install_n() {
     N_PREFIX=$HOME/.npm-global npm install -g n
     echo "export N_PREFIX=$HOME/.npm-global" | tee -a $HOME/.profile
     source $HOME/.profile
@@ -257,7 +257,7 @@ install_dockerce() {
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
     sudo apt update
-    sudo apt install docker containerd.io -y
+    sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 }
 
 install_dockercompose() {
@@ -265,7 +265,7 @@ install_dockercompose() {
         echo "Need To install Docker first "
         install_dockerce
     fi
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose 
     sudo docker-compose --version 
 }

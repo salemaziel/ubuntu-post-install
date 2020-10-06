@@ -163,7 +163,9 @@ options=(1 "Etcher: Live USB creator (RECOMMENDED)" on
          36 "OpenVPN3: Latest OpenVPN build (RECOMMENDED)" on
          37 "AppImageLauncher: Integrate AppImages to Desktop (RECOMMENDED)" on
          38 "Google Fonts:Fonts for your Desktop" on
-         39 "RClone: Cloud Sync Backups using Rsync" on)
+         39 "RClone: Cloud Sync Backups using Rsync" on
+         40 "PHP Composer: Package Manager for PHP" off
+         )
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 clear
 
@@ -333,6 +335,9 @@ do
         39)
             chmod +x install-rclone-cloudsync.sh
             ./install-rclone-cloudsync.sh
+            ;;
+        40)
+            install_phpcomposer
             ;;
     esac
 done

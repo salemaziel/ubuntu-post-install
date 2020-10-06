@@ -87,11 +87,11 @@ usropt_security() {
 }
 
 sysctl_conf() {
-    echo "# These are to use bbr, to make tcp protocol faster (aka most of the internet):"
+    echo "# These are to use bbr, to make tcp protocol faster (aka most of the internet):"  | sudo tee -a /etc/sysctl.conf
     echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
     echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
     echo " " | sudo tee -a /etc/sysctl.conf
-    echo "This disables WPAD, auto-proxy finding, to fix security issue of malicious websites finding local ip addresses:"
+    echo "This disables WPAD, auto-proxy finding, to fix security issue of malicious websites finding local ip addresses:"  | sudo tee -a /etc/sysctl.conf
     echo "net.ipv4.tcp_challenge_ack_limit = 999999999" | sudo tee -a /etc/sysctl.conf
     echo " " | sudo tee -a /etc/sysctl.conf
     echo "This makes npm useable along with a code editor like VS Code, trying to use without adding this will get you the warning from VS Code soon enough" | sudo tee -a /etc/sysctl.conf

@@ -2,8 +2,8 @@
 
 install_etcher() {
 echo_info " *********** Installing Etcher: Live USB creator ******** "
-echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list
-sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv-keys 379CE192D401AB61
+#echo "deb https://deb.etcher.io stable etcher" | sudo tee /etc/apt/sources.list.d/balena-etcher.list
+#sudo apt-key adv --keyserver hkps://keyserver.ubuntu.com:443 --recv-keys 379CE192D401AB61
 sudo apt update
 sudo apt install -y balena-etcher-electron -y
 }
@@ -45,7 +45,7 @@ echo_info "You can initialize and login while this script is running by opening 
 sleep 3
 }
 
-   
+ 
 install_signal() {
 echo_info " *** installing signal messenger for desktop *** "
 sudo apt install -y curl
@@ -108,16 +108,16 @@ install_slack() {
 echo_info " *** installing slack *** "
 cd $HOME/Downloads ;
 wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.2.0-amd64.deb
-sudo gdebi -n slack-desktop*.deb
+sudo gdebi -n slack-desktop-4.10.3-amd64.deb
 }
 
 
 install_vbox() {
 echo_info " *** installing virtualbox *** "
 cd $HOME/Downloads ;
-wget https://download.virtualbox.org/virtualbox/6.1.8/virtualbox-6.1_6.1.8-137981~Ubuntu~eoan_amd64.deb
-https://download.virtualbox.org/virtualbox/6.1.8/Oracle_VM_VirtualBox_Extension_Pack-6.1.8.vbox-extpack
-sudo gdebi -n virtualbox-6.1_6.1.8-137981~Ubuntu~eoan_amd64.deb
+wget https://download.virtualbox.org/virtualbox/6.1.16/virtualbox-6.1_6.1.16-140961~Ubuntu~eoan_amd64.deb
+wget https://download.virtualbox.org/virtualbox/6.1.16/Oracle_VM_VirtualBox_Extension_Pack-6.1.16.vbox-extpack
+sudo gdebi -n virtualbox-6.1_6.1.16-140961~Ubuntu~eoan_amd64.deb
 }
 
 install_vivaldi() {
@@ -126,6 +126,7 @@ cd ~/Downloads ;
 rm -rf vivaldi-stable*.deb
 wget https://downloads.vivaldi.com/stable/vivaldi-stable_2.9.1705.41-1_amd64.deb
 sudo gdebi -n vivaldi-stable*.deb
+sudo apt install vivaldi -y
 }
 
 install_zoom() {
@@ -171,19 +172,19 @@ sudo ln -s /opt/basecamp-linux-x64/basecamp /usr/local/bin/basecamp
 
 install_gcpsdk() {
 echo_info " ** installing Google Cloud Platform SDK commandline tools ** "
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+#echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 sudo apt-get install apt-transport-https ca-certificates gnupg
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - 
+#curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - 
 sudo apt-get update && sudo apt-get install google-cloud-sdk
 }
 
 
 install_node() {
-echo_info " ** Installing NodeJS 12 and npm node package manager ** "
+echo_info " ** Installing NodeJS 14 and npm node package manager ** "
 cd ;
 sudo apt install gcc g++ make build-essentials -y
 mkdir $HOME/.npm-global
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo -v
 sudo apt update
 sudo apt install -y nodejs
@@ -212,8 +213,8 @@ install_n() {
 }
 
 install_yarn() {
-    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+#    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+#    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt-get update && sudo apt-get install -y yarn
 }
 
@@ -228,7 +229,7 @@ sudo gdebi -n firejail-apparmor_0.9.56.2-LTS_1_amd64.deb
 install_stdnotes() {
 echo_info "Downloading Standard Notes: Encrypted Notebook app image"
 cd $HOME/Downloads ;
-wget https://github.com/standardnotes/desktop/releases/download/v3.0.23/Standard-Notes-3.0.23.AppImage
+curl -s https://api.github.com/repos/standardnotes/desktop/releases/latest | grep "browser_download_url.*AppImage" | cut -d : -f 2,3 | tr -d \" | tail -1 | wget -i -
 }
 
 install_discord() {
@@ -254,8 +255,8 @@ install_dockerce() {
     sudo apt remove docker* docker-engine docker.io containerd runc -y
     sudo apt update && sudo apt -y full-upgrade
     sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg-agent -y
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
+ #   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ #   sudo DEBIAN_FRONTEND=noninteractive add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" 
     sudo apt update
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 }
@@ -271,8 +272,8 @@ install_dockercompose() {
 }
 
 install_syncthing() {
-curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
-echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+#curl -s https://syncthing.net/release-key.txt | sudo apt-key add -
+#echo "deb https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
 sudo apt-get update && sudo apt install syncthing
 }
 
@@ -295,8 +296,8 @@ Categories=Development;Utilities;" >> $HOME/.local/share/applications/postman.de
 
 install_openvpn3() {
     sudo apt install apt-transport-https
-    wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
-    sudo apt-key add openvpn-repo-pkg-key.pub
+#    wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
+#    sudo apt-key add openvpn-repo-pkg-key.pub
     if [[ -z $(ls /etc/os-release) ]]; then
         echo "no /etc/os-release, can't tell what distro you're using, but its not ubuntu or debian. Skipping."
     else
@@ -347,4 +348,4 @@ install_appimagelauncher() {
     sudo DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:appimagelauncher-team/stable
     sudo apt-get update
     sudo apt install appimagelauncher
-} 
+}

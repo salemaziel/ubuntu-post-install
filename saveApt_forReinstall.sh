@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# Add color
 ANSI_RED=$'\033[1;31m'
 ANSI_YEL=$'\033[1;33m'
 ANSI_GRN=$'\033[1;32m'
@@ -9,7 +9,7 @@ ANSI_BLU=$'\033[1;36m'
 ANSI_WHT=$'\033[1;37m'
 ANSI_RST=$'\033[0m'
 
-
+# Add colors to specific outputs
 echo_cmd()    { echo -e "${ANSI_BLU}${@}${ANSI_RST}"; }
 echo_prompt() { echo -e "${ANSI_YEL}${@}${ANSI_RST}"; }
 echo_note()   { echo -e "${ANSI_GRN}${@}${ANSI_RST}"; }
@@ -17,6 +17,9 @@ echo_info()   { echo -e "${ANSI_WHT}${@}${ANSI_RST}"; }
 echo_warn()   { echo -e "${ANSI_YEL}${@}${ANSI_RST}"; }
 echo_debug()  { echo -e "${ANSI_VIO}${@}${ANSI_RST}"; }
 echo_fail()   { echo -e "${ANSI_RED}${@}${ANSI_RST}"; }
+
+
+
 
 
 

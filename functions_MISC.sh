@@ -16,8 +16,8 @@ git_scriptsntools() {
 gitonions_scriptsntools() {
     if [[ -z $(which git) ]]; then
         read -p "Run update? [y/n]" apt_upt
-            case $apt_upt in   
-                Y) sudo apt update 
+            case $apt_upt in
+                Y) sudo apt update
                     ;;
                 y) sudo apt update
                     ;;
@@ -26,7 +26,7 @@ gitonions_scriptsntools() {
                 n) echo "Skipping apt update"
                     ;;
             esac
-    
+
         sudo apt install -y git torsocks
     fi
     cd ;
@@ -91,10 +91,10 @@ sysctl_conf() {
     echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
     echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
     echo " " | sudo tee -a /etc/sysctl.conf
-    echo "This disables WPAD, auto-proxy finding, to fix security issue of malicious websites finding local ip addresses:"  | sudo tee -a /etc/sysctl.conf
+    echo "# This disables WPAD, auto-proxy finding, to fix security issue of malicious websites finding local ip addresses:"  | sudo tee -a /etc/sysctl.conf
     echo "net.ipv4.tcp_challenge_ack_limit = 999999999" | sudo tee -a /etc/sysctl.conf
     echo " " | sudo tee -a /etc/sysctl.conf
-    echo "This makes npm useable along with a code editor like VS Code, trying to use without adding this will get you the warning from VS Code soon enough" | sudo tee -a /etc/sysctl.conf
+    echo "# This makes npm useable along with a code editor like VS Code, trying to use without adding this will get you the warning from VS Code soon enough" | sudo tee -a /etc/sysctl.conf
     echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
     sudo sysctl --system
 
